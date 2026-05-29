@@ -1,0 +1,15 @@
+services:
+  dvwa:
+    image: vulnerables/web-dvwa
+    container_name: dvwa
+    restart: always
+
+  waf:
+    image: nginx:latest
+    container_name: waf
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - dvwa
